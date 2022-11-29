@@ -38,11 +38,15 @@ fastify.post<{ Body: ResizeBody }>("/resize", {}, async (request, reply) => {
   }
 });
 
+const PORT = parseInt(process.env.PORT || "3000") || 3000;
 
-fastify.listen({ port: 0 }, async (err, address) => {
-  console.log(address);
-  if (err) {
-    fastify.log.error(err);
-    process.exit(1);
+fastify.listen(
+  { port: PORT, host: "0.0.0.0" },
+  async (err, address) => {
+    console.log(address);
+    if (err) {
+      fastify.log.error(err);
+      process.exit(1);
+    }
   }
-});
+);
