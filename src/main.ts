@@ -22,7 +22,6 @@ fastify.post<{ Body: ResizeBody }>("/resize", {}, async (request, reply) => {
     const resizedImage = await resizer.resize(
       {
         base64ImageData: result,
-        size: result.length,
         timestamp: new Date().getTime(),
       },
       300,
@@ -40,9 +39,9 @@ fastify.post<{ Body: ResizeBody }>("/resize", {}, async (request, reply) => {
 });
 
 // Run the server!
-fastify.listen({ port: 3000 }, (err) => {
+fastify.listen({ port: 3000 }, async (err) => {
   if (err) {
-    fastify.log.error(err);
+    fastify.log.error(err)
     process.exit(1);
   }
 });
