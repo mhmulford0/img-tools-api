@@ -39,7 +39,7 @@ fastify.post<{ Body: ResizeBody }>("/resize", {}, async (request, reply) => {
 });
 
 const port = parseInt(process.env.PORT ? process.env.PORT : "3000");
-
+console.log(port)
 // Run the server!
 fastify.listen({ port }, async (err) => {
   if (err) {
