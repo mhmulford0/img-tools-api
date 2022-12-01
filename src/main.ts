@@ -1,8 +1,11 @@
 import Fastify from "fastify";
 import { z, ZodError } from "zod";
+import fileUpload from 'fastify-file-upload'
 import { ImageResizer } from "./core/Image";
 
 const fastify = Fastify({});
+fastify.register(fileUpload)
+
 
 const resizer = new ImageResizer();
 
@@ -15,6 +18,7 @@ fastify.get("/", function (_request, reply) {
 });
 
 fastify.post<{ Body: ResizeBody }>("/resize", {}, async (request, reply) => {
+  
   try {
     const resizeSchema = z.string().min(1, { message: "Body must be at least one character" });
 
